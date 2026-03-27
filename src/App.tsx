@@ -1,20 +1,17 @@
-import { useUsers } from './hooks/useUsers'
+import { useState } from 'react'
+import Users from './Users'
 
 function App() {
-  const { data, isLoading, error } = useUsers()
-  if (isLoading) return <p>Loading...</p>
-  if (error) return <p>Error occurred</p>
-
+  const [show, setShow] = useState(true)
+  
   return (
     <div>
       <h1>ユーザー一覧</h1>
-      <ul>
-        {data?.map((user) => (
-          <li key={user.id}>
-            {user.name} / {user.email}
-          </li>
-        ))}
-      </ul>
+      <button onClick={() => setShow(!show)}>
+        表示切り替え
+      </button>
+
+      {show && <Users />}
     </div>
   )
 }
